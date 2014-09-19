@@ -173,7 +173,7 @@ class Mysql2psql
     def connect
       @mysql = ::Mysql.connect(@host, @user, @passwd, @db, @port, @sock, @flag)
       @mysql.query("SET NAMES utf8")
-      @mysql.query("SET SESSION query_cache_type = OFF")
+      # @mysql.query("SET SESSION query_cache_type = OFF")
     end
   
     def reconnect
