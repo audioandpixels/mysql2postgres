@@ -9,7 +9,7 @@ class PostgresDbWriter < PostgresWriter
   
   def initialize(options)
     @hostname, @login, @password, @database, @port =
-      options.pghostname('localhost'), options.pgusername,
+      options.pghost, options.pgusername,
       options.pgpassword, options.pgdatabase, options.pgport(5432).to_s
     @database, @schema = database.split(":")
     open
