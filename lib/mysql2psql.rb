@@ -16,11 +16,11 @@ class Mysql2psql
   def initialize(args)
     help if args.length==1 && args[0] =~ /^-.?|^-*he?l?p?$/i 
     configfile = args[0] || File.expand_path('mysql2psql.yml')
-    @options = Config.new( configfile, true )
+    @options = Config.new(configfile, true)
   end
   
   def convert
-    @reader = MysqlReader.new( options )
+    @reader = MysqlReader.new(options)
 
     if options.destfile(nil)
       @writer = PostgresFileWriter.new(options.destfile)

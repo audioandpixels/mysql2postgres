@@ -183,7 +183,7 @@ class Mysql2psql
   
     def initialize(options)
       @host, @user, @passwd, @db, @port, @sock, @flag =
-        options.mysqlhost, options.mysqlusername,
+        options.mysqlhost, options.mysqluser || options.mysqlusername,
         options.mysqlpassword, options.mysqldatabase,
         options.mysqlport, options.mysqlsocket
       @port = nil if @port == ""  # for things like Amazon's RDS you don't have a port and connect fails with "" for a value

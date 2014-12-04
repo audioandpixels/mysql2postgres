@@ -8,11 +8,13 @@ class Mysql2psql
 
     def initialize(configfilepath)
       @filepath=configfilepath
-      @config = YAML::load(File.read(filepath))
+      @config = YAML::load(ERB.new(File.read(filepath)).result)
     end
+
     def [](key)
       self.send( key )
     end
+
     def method_missing(name, *args)
       token=name.to_s
       default = args.length>0 ? args[0] : ''
@@ -20,10 +22,22 @@ class Mysql2psql
       case token
       when /mysql/i
         key=token.sub( /^mysql/, '' )
-        value=config["mysql2psql"]["mysql"][key]
+        
+        if config["mysql2psql"]["mysql"]["url"]
+          value = DatabaseUrl.to_active_record_hash(config["mysql2psql"]["mysql"]["url"])[key.to_sym]
+        else
+          value=config["mysql2psql"]["mysql"][key]
+        end
+        
       when /pg/i
         key=token.sub( /^pg/, '' )
-        value=config["mysql2psql"]["destination"]["postgres"][key]
+
+        if config["mysql2psql"]["destination"]["postgres"]["url"]
+          value = DatabaseUrl.to_active_record_hash(config["mysql2psql"]["destination"]["postgres"]["url"])[key.to_sym]
+        else
+          value = config["mysql2psql"]["destination"]["postgres"][key]
+        end
+
       when /dest/i
         key=token.sub( /^dest/, '' )
         value=config["mysql2psql"]["destination"][key]
@@ -34,6 +48,7 @@ class Mysql2psql
       end
       value.nil? ? ( must_be_defined ? (raise Mysql2psql::UninitializedValueError.new("no value and no default for #{name}")) : default ) : value
     end
+
   end
-  
+
 end
