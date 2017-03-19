@@ -23,7 +23,6 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<mysql2psql>, [">= 0"])
       s.add_development_dependency(%q<bundler>, ["~> 1.0.21"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.5.2"])
       s.add_development_dependency(%q<bundler>, ["~> 1.0.21"])
@@ -51,7 +50,6 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<rake>, ["~> 0.9.2.2"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
     else
-      s.add_dependency(%q<mysql2psql>, [">= 0"])
       s.add_dependency(%q<bundler>, ["~> 1.0.21"])
       s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
       s.add_dependency(%q<bundler>, ["~> 1.0.21"])
@@ -80,7 +78,6 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
     end
   else
-    s.add_dependency(%q<mysql2psql>, [">= 0"])
     s.add_dependency(%q<bundler>, ["~> 1.0.21"])
     s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
     s.add_dependency(%q<bundler>, ["~> 1.0.21"])
