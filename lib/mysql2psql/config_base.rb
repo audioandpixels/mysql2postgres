@@ -24,7 +24,7 @@ class Mysql2psql
         key=token.sub( /^mysql/, '' )
 
         if config["mysql2psql"]["mysql"]["url"]
-          value = DatabaseUrl.to_active_record_hash(config["mysql2psql"]["mysql"]["url"])[key.to_sym]
+          value = ::DatabaseUrl.to_active_record_hash(config["mysql2psql"]["mysql"]["url"])[key.to_sym]
         else
           value=config["mysql2psql"]["mysql"][key]
         end
@@ -33,7 +33,7 @@ class Mysql2psql
         key=token.sub( /^pg/, '' )
 
         if config["mysql2psql"]["destination"]["postgres"]["url"]
-          value = DatabaseUrl.to_active_record_hash(config["mysql2psql"]["destination"]["postgres"]["url"])[key.to_sym]
+          value = ::DatabaseUrl.to_active_record_hash(config["mysql2psql"]["destination"]["postgres"]["url"])[key.to_sym]
         else
           value = config["mysql2psql"]["destination"]["postgres"][key]
         end
