@@ -2,13 +2,13 @@ require 'yaml'
 require 'mysql2psql/errors'
 
 class Mysql2psql
-  
+
   class ConfigBase
     attr_reader :config, :filepath
 
     def initialize(configfilepath)
       @filepath=configfilepath
-      @config = YAML::load(ERB.new(File.read(filepath)).result)
+      @config = YAML::load(::ERB.new(File.read(filepath)).result)
     end
 
     def [](key)
@@ -22,13 +22,13 @@ class Mysql2psql
       case token
       when /mysql/i
         key=token.sub( /^mysql/, '' )
-        
+
         if config["mysql2psql"]["mysql"]["url"]
           value = DatabaseUrl.to_active_record_hash(config["mysql2psql"]["mysql"]["url"])[key.to_sym]
         else
           value=config["mysql2psql"]["mysql"][key]
         end
-        
+
       when /pg/i
         key=token.sub( /^pg/, '' )
 
@@ -42,7 +42,7 @@ class Mysql2psql
         key=token.sub( /^dest/, '' )
         value=config["mysql2psql"]["destination"][key]
       when /only_tables/i
-        value=config["mysql2psql"]["tables"] 
+        value=config["mysql2psql"]["tables"]
       else
         value=config["mysql2psql"][token]
       end
