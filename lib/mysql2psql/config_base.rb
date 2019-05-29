@@ -8,7 +8,7 @@ class Mysql2psql
 
     def initialize(configfilepath)
       @filepath=configfilepath
-      @config = YAML::load(::ERB.new(File.read(filepath)).result)
+      @config = YAML::load(File.read(filepath))
     end
 
     def [](key)
